@@ -2,7 +2,7 @@
 
 void log(const std::string& text)
 {
-    Logger::Instance().consolLog(text);
+    Logger::Instance().console_log(text);
 }
 
 int main()
