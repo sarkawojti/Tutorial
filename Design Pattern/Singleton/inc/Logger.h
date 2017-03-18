@@ -5,7 +5,7 @@
 
 /****    Singleton         kreacyjny wzorzec projektowy    ****/
 
-class Logger
+class ConsolLogger
 {
 public:
     /**
@@ -14,21 +14,21 @@ public:
     - tworzenie obiektu w momencie jego pierwszego u¿ycia (lazy initialization)
     - globalny dostêp do stworzenego obiektu
     **/
-    static Logger& Instance();
+    static ConsolLogger& Instance();
 
     /** delete move/copy constructor and move/copy assignment operator **/
-    Logger(Logger const&) = delete;
-    Logger(Logger&&) = delete;
-    Logger& operator=(Logger const&) = delete;
-    Logger& operator=(Logger &&) = delete;
+    ConsolLogger(ConsolLogger const&) = delete;
+    ConsolLogger(ConsolLogger&&) = delete;
+    ConsolLogger& operator=(ConsolLogger const&) = delete;
+    ConsolLogger& operator=(ConsolLogger &&) = delete;
 
     /**
     inne metody i pola u¿ytkowe
     **/
-    void console_log(const std::string&);
+    void log(const std::string&);
 private:
     /** private constructor **/
-    Logger() = default;
+    ConsolLogger() = default;
 
     /** mutex odpowiada za synchronizacje miêdzy w¹tkami i chroni
         wspó³dzielony obszar przed jednoczesnym dostêpem wielu w¹tków **/
@@ -36,16 +36,16 @@ private:
     std::mutex console_log_mutex;
 };
 
-std::mutex Logger::create_instance_m;
+std::mutex ConsolLogger::create_instance_m;
 
-void Logger::console_log(const std::string& text)
+void ConsolLogger::log(const std::string& text)
 {
     /** thread-safe cout method **/
     std::lock_guard<std::mutex> guard(console_log_mutex);
     std::cout << text << std::endl;
 }
 
-Logger& Logger::Instance()
+ConsolLogger& ConsolLogger::Instance()
 {
    /**thread-safe Singleton
    lock_guard - koncepcja wzorca projektowego RAII która
@@ -55,6 +55,6 @@ Logger& Logger::Instance()
    mo¿na równie¿ u¿yæ: unique_lock lub mutex.lock()/unlock()
    **/
    std::lock_guard<std::mutex> guard(create_instance_m);
-   static Logger instance;
+   static ConsolLogger instance;
    return instance;
 }
