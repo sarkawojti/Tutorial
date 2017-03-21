@@ -16,9 +16,11 @@ int main()
     std::vector<IBook*> books_catalog_deep_copy;
     for(const auto& book : books_catalog)
     {
-        books_catalog_deep_copy.push_back( (*book).clone() );
+        books_catalog_deep_copy.push_back( book->clone() );
     }
     /** kopia zapasowa, kopia dla innego usera **/
+
+    std::cout << books_catalog_deep_copy[0]->title() << std::endl;
 
     return 0;
 }
