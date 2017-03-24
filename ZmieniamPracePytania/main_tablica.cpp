@@ -66,7 +66,6 @@ int main()
     }
 
     std::cout << "Sum : " << func(array, size, Sum<int>()) << std::endl;
-
     std::cout << "Multi : " << func(array, size, Multi<int>()) << std::endl;
 
     return 0;
