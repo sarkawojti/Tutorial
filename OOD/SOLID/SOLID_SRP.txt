@@ -1,0 +1,11 @@
+
+SRP - Single Responsible Principal
+
+Obiekt (klasa) powinny byc odpowiedzialne za jak najmniejszy fragment logiki,
+czyli powinien istniec wylacznie jeden powod do zmiany.
+
+Przyklad zlamania zasady:
+    Napisanie klasy ktora wykonuje obliczenia i wyswietla wynik.
+
+Przyklad zachowania zasady:
+    Napisanie dwoch klas ktore, jedna wykonuje obliczenia a druga wyswietla wynik.

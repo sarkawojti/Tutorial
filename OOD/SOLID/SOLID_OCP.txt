@@ -1,0 +1,68 @@
+
+OCP - Open Close Principal
+
+Elementy oprogramowania [funkcje/metody/klasy/moduly]
+powinny byæ otwarte na rozszerzania (extensions) [zachowanie moze zostac rozszerzone lub zmienione w zaleznosci od potrzeb]
+natomiast zamkniête na modyfikacje (modifications) [ograniczenie zmian kodu zrodlowego modulu do rozszerzenia lub zmiany jego zachowania].
+
+Przyklad zlamania zasady:
+
+    metoda do obliczania pol figur.
+
+    #include <type_traits>
+    void area(IShape shape)
+    {
+        if(std::is_same<decltype(shape), Triangle>::value)
+        {
+            Triangle triangle = (Triangle) shape;
+            return triangle.a * triangle.h / 2;
+        }
+        return 0.0;
+    }
+
+    jesli chcemy dodac kolejne figury musimy zmienic kod zrodlowy dodajac kolejnego "else".
+
+    #include <type_traits>
+    void area(const IShape& shape)
+    {
+        if(std::is_same<decltype(shape), Triangle>::value)
+        {
+            Triangle triangle = (Triangle) shape;
+            return triangle.a * triangle.h / 2;
+        }
+        else if(std::is_same<decltype(shape), Rectangle>::value)
+        {
+            Rectangle rectangle = (Rectangle) shape;
+            return rectangle.a * rectangle.h / 2;
+        }
+        return 0.0;
+    }
+
+Przyklad zachowania zasady:
+
+    metoda do obliczania pol figur.
+
+    void area(const IShape& shape)
+    {
+        return shape.area;
+    }
+
+    class IShape
+    {
+    ....
+    virtual double area() const = 0;
+    };
+
+    class Rectangle : public Triangle
+    {
+    ...
+    double area() const override { ...}
+    };
+
+    class Rectangle : public Rectangle
+    {
+    ...
+    double area() const override { ...}
+    };
+
+    dodanie kolejnej figury nie zmieni zachowania kodu a jedynie rozszerzy jego zachowanie.
