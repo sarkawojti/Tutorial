@@ -1,0 +1,21 @@
+
+=====================================
+
+Fabryka vs Budowniczy
+
+=====================================
+
+Fabryka to wzorzec klasowy a Budowniczy wzorzec obiektowy.
+
+Budowniczy tworzy drobna czesc skomplikowanego produktu za ka¿dym  swoim 
+wywolaniem jednoczesnie kontrolujac stan wykonanej pracy. Klient otrzymuje 
+konkretny produkt po zakonczeniu wszelkich etapow budowy.
+
+W fabryce otrzymujemy konkretny produkt od razu.
+
+
+Przyklad:  [Pizzeria]
+
+W fabryce tworzymy od razu dynamicznie obiekt zamowionej pizzy. Natowmiast 
+w budowniczym tworzony jest podstawowy obiekt pizzy i nastepnie dodawane sa 
+do niego  wlasciwosci (dodatki warzywne/miesne, sosy, sery).
