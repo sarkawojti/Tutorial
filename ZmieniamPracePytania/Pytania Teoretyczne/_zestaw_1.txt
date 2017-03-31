@@ -1,0 +1,17 @@
+
+1.	Refernecja vs wskaznik
+2.	Klasa vs stuktura
+3.	Klasyfikacja wzorcow wg Gang of Four
+4.	Wzorce projektowe - fabryka vs budowniczy
+5.	Wzorce projektowe - Pelnomocnik
+6.	Rzucanie wyjatkow przez konstruktor i destruktor
+7.	Wzorce projektowe - RAII
+8.	The rules of five
+9.	Kontenery STL - set i mapa
+10.	Rzutowanie - static_cast vs dynamic_cast
+11.	Multithreading - zmienne volatile
+12.	Multithreading - race condition
+13.	Multithreading - deadlock
+14.	Wielodziedziczenie - diamond problem
+15.	Kontenery STL - vector vs list
+16.	Zasady SOLID - SRP
