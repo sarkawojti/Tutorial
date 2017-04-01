@@ -1,0 +1,44 @@
+
+Klasyfikacja wg rodzaju i opisu:
+
+    I. Kreacyjne - opisuja proces tworzenia nowych obiektow. 
+           Maja za zadanie tworzenie, inicjowanie i konfiguracje.
+
+	Singleton			obiektowy
+	Budowniczy			obiektowy
+	Metoda wytworcza		klasowy
+	Fabryka abstrakcyjna		obiektowy
+	Prototyp			obiektowy
+
+    II. Strukturalne - opisuje statyczne zwiazku pomiedzy klasami/obiektami.
+
+	Adapter				klasowy/obiektowy
+	Dekorator			obiektowy
+	Fasada				obiektowy
+	Kompozyt			obiektowy
+	Most				obiektowy
+	Pelnomocnik			obiektowy
+	Pylek				obiektowy
+
+    III. Czynnosciowe/Operacyjne - opisuja zachowanie i odpowiedzialnosc 
+	     wspolpracujacych ze soba obiektow/klas.
+
+	Lancuch zobowiazan		obiektowy
+	Polecenie			obiektowy
+	Interpreter			klasowy
+	Iterator			obiektowy
+	Mediator			obiektowy
+	Pamiatka			obiektowy
+	Metoda szablonowa		klasowy
+	Obserwator			obiektowy
+	Stan				obiektowy
+	Strategia			obiektowy
+	Odwiedzajacy			obiektowy
+	
+
+Klasyfikacja wg zakresu zwiazkow:
+
+    I. Klasowe - opisuja statyczne zwiazki pomiedzy klasami.
+    II.Obiektowe - opisuja dynamiczne zwiazki pomiedzy obiektami.
+
+
