@@ -1,0 +1,55 @@
+
+=============================================================================================================================
+RACE CONDITION (wyscig) - wiele watkow ma jednoczesny dostep do tego samego zasobu [pisze lub czyta te sama pamiec] 
+	czego skutkiem jest niewlasciwa wartosc (niezdefiniowane zachowanie).
+	
+	Rozwiazanie problemu: synchronizacja (blokada)
+	
+	1. mutex - uzywany do szeregowania dostepu do zasobu. Stany: zablokowany, odblokowany.
+	   C++11: lock/unlock	- unsafety, lock_guard, unique_lock
+		
+SEKCJA KRYTYCZNA - wydzielony fragment kodu, ktory nie moze byc wykonywany rownolegle w programie wielowatkowym.
+=============================================================================================================================
+=============================================================================================================================
+STARVATION (zaglodzenie) - problem, kiedy watek dziala ale w zaden sposob nie moze uzyskac dostepu do wspoldzielonych zasobow.
+	
+	Przyklad - dwie osoby chca rysowac na tablicy, ale jedna [majaca wyzszy priorytet] nie chce go oddac.
+=============================================================================================================================
+=============================================================================================================================	
+LIVELOCK (zakleszczenie) - problem, w ktorym zaden z watkow nie moze w pelni uzyskac dostepu do wspolnych zasobow.
+
+	Przyklad - dwie osoby chca rysowac na tablicy, jedna zabrala dlugopis a druga linijke a potem sie wymienily, 
+		ale zawsze kazdej brakuje czegos by w pelni zrealizowac swoje zadanie.
+=============================================================================================================================
+=============================================================================================================================
+DEADLOCK (zakleszczenie) - problem, w ktorym co najmniej dwa watki czekaja na siebie nawzajem [zawieszenie sie aplikacji].
+
+	Przyklad - problem ucztujacych filozofow.
+	
+		Pieciu filozofow siedzi przy okraglym stole. Kazdy z nich wykonuje jedna z dwoch czynnosci: je albo rozmysla. 
+		Przed kazdym filozofem znajduje się miska ryzu, a miedzy każdą sasiadujaca para filozofow znajduje się paleczka
+		(wiec kazdy filozof ma jedna z lewej i jedna z prawej). Aby jesc ryz paleczkami trzeba miec dwie wiec kiedy filozof
+		zdecyduje, ze bedzie jesc, zabiera paleczke z lewej, a potem z prawej. Jesli ktoras z paleczek bedzie nieosiagalna
+		(inny filozof nia je), to bedzie na nia czekac. Problem pojawia sie, gdy wszyscy ucztujacy postanowia jesc w tym 
+		samym czasie. Wtedy kazdy zabiera paleczke z lewej i.. czeka na paleczke z prawej.
+		
+	Przyklad C++
+	
+		void method_A()							void method_B()
+		{										{
+			lock(mutexA); 							lock(mutexB);	
+			lock(mutexB);							lock(mutexA);
+			//do something							//do something
+		}										}
+		
+		Zalozmy, że method_A oraz method_B uruchamiane sa w dwoch roznych watkach. Ponadto przypuscmy, ze aktualnie obydwu 
+		metodom udalo sie wykonac pierwszy lock  – lock(mutexA) dla method_A oraz lock(mutexB) dla method_B. I co dalej? 
+		Oczywiscie algorytm sie zakleszczy poniewaz w przypadku method_A nie mozna bedzie uzyskac blokady do mutexB 
+		(zostala ona juz przyznana method_B) a w przypadku method_B sytuacja wygląda analogicznie.
+
+		Rozwiazanie problemu:
+			
+		1. preferowanie pojedynczych blokad.
+		2. uzywanie std::lock() do lokowania wiecej niz jednej blokady.
+		3. Lokowanie blokad w takich samych kolejnosciach
+=============================================================================================================================
