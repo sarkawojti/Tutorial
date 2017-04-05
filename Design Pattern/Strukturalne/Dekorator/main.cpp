@@ -30,16 +30,16 @@ int main()
     return 0;
 }
 
-/** Dekoraotr  - obiektowy wzorzec strukturalny **/
+/** Dekorator  - obiektowy wzorzec strukturalny **/
 
 /**
 
-Dekorator musi miec taki sam interfejs jak obiekt, który bêdziemy dekorowac
-(obiekty dekoruj¹ce sa tego samego typu co obiekty dekorowane).
+Dekorator musi miec taki sam interfejs jak obiekt, ktory bedziemy dekorowac
+(obiekty dekorujace sa tego samego typu co obiekty dekorowane).
 Do dekoratora przekazujemy dekorowany obiekt. Wolajac funkcje dekoratora wolamy
-funkcje z obiektu dekorujacego a nastepnie dodajemy fumkcjonalnosc.
-W przeciwienstwie do dziedziczenia, obiekty dostaja nowe funkcjonalnoœci dynamicznie
-( w trakcie dzialania programu), a nie na etapie kompilacji.
-Klient wcale nie musi wiedziec o dzia³aniu wzorca.
+funkcje z obiektu dekorowanego a nastepnie dodajemy nowa funkcjonalnosc.
+W przeciwienstwie do dziedziczenia, obiekty dostaja nowe funkcjonalnosci dynamicznie
+(w trakcie dzialania programu), a nie na etapie kompilacji.
+Klient wcale nie musi wiedziec o dzialaniu wzorca.
 
 **/
