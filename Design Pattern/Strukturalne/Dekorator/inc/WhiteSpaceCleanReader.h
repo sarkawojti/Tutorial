@@ -1,14 +1,13 @@
+
 #pragma once
 
-#include "IReader.h"
+#include "ReaderDecorator.h"
 #include <iostream>
 #include <memory>
 
-class WhiteSpaceCleanReader : public IReader
+class WhiteSpaceCleanReader : public ReaderDecorator
 {
 public:
-    WhiteSpaceCleanReader(std::shared_ptr<IReader> &);
+    WhiteSpaceCleanReader(std::shared_ptr<IReader> & reader): ReaderDecorator(reader){}
     std::string read() override;
-private:
-    std::shared_ptr<IReader> reader;
 };

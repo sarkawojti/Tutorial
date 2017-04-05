@@ -1,15 +1,13 @@
+
 #pragma once
 
-#include "IReader.h"
+#include "ReaderDecorator.h"
 #include <iostream>
 #include <memory>
 
-class UpperReader : public IReader
+class UpperReader : public ReaderDecorator
 {
 public:
-    UpperReader(std::shared_ptr<IReader> &);
+    UpperReader(std::shared_ptr<IReader> & reader): ReaderDecorator(reader){}
     std::string read() override;
-private:
-    std::shared_ptr<IReader> reader;
 };
-

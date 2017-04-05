@@ -1,10 +1,6 @@
+
 #include "../inc/WhiteSpaceCleanReader.h"
 #include <algorithm>
-
-WhiteSpaceCleanReader::WhiteSpaceCleanReader(std::shared_ptr<IReader>& _reader):
-    reader(_reader)
-{
-}
 
 std::string WhiteSpaceCleanReader::read()
 {
@@ -15,5 +11,3 @@ std::string WhiteSpaceCleanReader::read()
                 result.end());
     return result;
 }
-
-

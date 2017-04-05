@@ -8,10 +8,8 @@ ConsoleReader::ConsoleReader(const std::string& _command_name):
 std::string ConsoleReader::read()
 {
     std::string result;
-
     std::cout << command_name;
     std::getline(std::cin, result);
 
     return result;
 }
-

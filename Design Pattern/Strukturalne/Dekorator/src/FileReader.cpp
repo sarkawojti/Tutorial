@@ -13,7 +13,8 @@ std::string FileReader::read()
     file.open(file_name.c_str());
 
     std::string result;
-    while (not file.eof())
+    while (file.good() and
+           not file.eof())
     {
         std::string tmp;
         std::getline(file, tmp);
