@@ -1,6 +1,0 @@
-
-boost::variant
-
-	- typ zlozony bedacy odpowiednikiem unii w C [slowo kluczowe 'union']
-	- wielkosc typu odpowiada wielkosci najwiekszego przechowywanego typu
-	- mozna przechowywac typy majace konstrukotry [roznica z C++]
