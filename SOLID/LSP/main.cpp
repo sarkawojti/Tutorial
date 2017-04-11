@@ -47,6 +47,8 @@ public:
 
 int main()
 {
+    /** ...musza byc w stanie uzywac... **/
+
     //Rectangle &&_rectangle = Rectangle();
     //Rectangle* _rectangle = new Rectangle();
     /** zmiana referencji do obiektu nie powinna wplywac na rezultat funkcji. **/
