@@ -5,13 +5,13 @@
 
 /**
     „Funkcje ktore uzywaja wskaznikow lub referencji do klas bazowych,
-    musza byc w stanie uzywac rowniez obiektow klas po klasach bazowych,
-    bez dokladnej znajomosci tych obiektow”.
+    musza byc w stanie uzywac rowniez obiektow klas pochodnych po
+    klasach bazowych, bez dokladnej znajomosci tych obiektow”.
 **/
 /**
     "... bez dokladnej znajomosci ..."
-    w funkcji nie powinnismy sie poslugiwac zadnymi konstrukcjami warunkowymi
-    aby wymusic poprawne dzialanie
+    w funkcji nie powinnismy sie poslugiwac zadnymi konstrukcjami
+    warunkowymi aby wymusic poprawne dzialanie
 
     - zlamanie zasady:
     void func(Base *base)
