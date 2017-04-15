@@ -6,7 +6,12 @@
 class ReaderDecorator : public IReader
 {
 public:
-    ReaderDecorator(std::shared_ptr<IReader>& _reader): reader(_reader){}
+    ReaderDecorator(const std::shared_ptr<IReader>& _reader): reader(_reader){}
+
+    void set_reader(const std::shared_ptr<IReader>& _reader)
+    {
+        reader = _reader;
+    }
 protected:
     std::shared_ptr<IReader> reader;
 };

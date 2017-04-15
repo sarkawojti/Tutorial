@@ -8,6 +8,6 @@
 class UpperReader : public ReaderDecorator
 {
 public:
-    UpperReader(std::shared_ptr<IReader> & reader): ReaderDecorator(reader){}
+    UpperReader(const std::shared_ptr<IReader> & reader = nullptr): ReaderDecorator(reader){}
     std::string read() override;
 };

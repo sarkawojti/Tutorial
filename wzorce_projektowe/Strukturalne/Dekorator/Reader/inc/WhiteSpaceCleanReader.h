@@ -8,6 +8,6 @@
 class WhiteSpaceCleanReader : public ReaderDecorator
 {
 public:
-    WhiteSpaceCleanReader(std::shared_ptr<IReader> & reader): ReaderDecorator(reader){}
+    WhiteSpaceCleanReader(const std::shared_ptr<IReader> & reader = nullptr): ReaderDecorator(reader){}
     std::string read() override;
 };
