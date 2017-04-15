@@ -1,0 +1,10 @@
+
+WZORCE STRUKTURALNE - opisuja struktury powiazanych ze soba obiektow
+	
+	ADAPTER					klasowy/obiektowy
+	DEKORATOR				obiektowy
+	FASADA					obiektowy		
+	KOMPOZYT				obiektowy
+	MOST					obiektowy
+	PELNOMOCNIK				obiektowy
+	PYLEK					obiektowy
