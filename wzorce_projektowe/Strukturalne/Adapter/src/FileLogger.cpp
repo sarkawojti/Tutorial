@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void FileLogger::log(const std::string& level, const std::string& msg)
+void FileLogger::log(const std::string& level, const std::string& msg) const
 {
     if(not _file.is_open())
     {
