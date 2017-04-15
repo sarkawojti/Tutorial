@@ -1,0 +1,7 @@
+
+Aplikacja bankomatowa, ktora musi wchodzic w interakcje z systemem bankowym.
+Skoro aplikacja bankomatowa wykorzystuje tylko niewielka czesc mozilowsci 
+systemu bankowego (autoryzacja karty/ sprawdzanie stanu konta/ wyplata gotowki)
+to mozna zastosowac obiekt fasady, ktory zasloni przed zewnetrzymi aplikacjami
+skomplikowana wewnetrzna strukture systemu bankowego. Uzyskujemy uproszczony
+system pisania aplikacji bankomatowych i gwarantuje bezpieczenstwo systemu bankowego.
