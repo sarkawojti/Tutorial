@@ -1,6 +1,7 @@
 
 #include "inc/Socket.h"
 #include "inc/EuropeanSocketInterface.h"
+#include "inc/USASocketInterface.h"
 #include "inc/AdapterSocket.h"
 
 #include <memory>
@@ -15,6 +16,7 @@ int main()
 
     adapter->plug_in(socket);
 
+    std::shared_ptr<USASocketInterface> usa_socket = adapter;
 
     return 0;
 }
