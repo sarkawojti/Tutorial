@@ -10,7 +10,7 @@ Definicja:
 Objasnienie:
 
     Zasada ta polega na umieszczeniu w interfejsie/klasie/funkcji tylko takich 
-    funkcjonalnosci, ktore maja scisle polaczenie, wpisuja sie w ich przeznaczenie.
+    funkcjonalnosci, ktore maja scisle polaczeniez nimi, wpisuja sie w ich przeznaczenie.
 
 Konsekwencje:
 
@@ -20,7 +20,8 @@ Konsekwencje:
     - duza przejrzystosc i czytelnosc kodu;
     - latowosc jego utrzymania i rozwoju 
       [brak konfliktow przy realizacji zadan];
-    - spadek wskaznika powtarzania sie kodu;
+    - spadek wskaznika powtarzania sie kodu
+      [wykorzytanie nowych klas w innych czesciach kodu];
     - uproszczenie testowania kodu;
 
     
