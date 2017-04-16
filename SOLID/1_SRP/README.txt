@@ -10,7 +10,7 @@ Definicja:
 Objasnienie:
 
     Zasada ta polega na umieszczeniu w interfejsie/klasie/funkcji tylko takich 
-    funkcjonalnosci, ktore maja scisle polaczeniez nimi, wpisuja sie w ich przeznaczenie.
+    funkcjonalnosci, ktore maja scisle polaczenie z nimi, wpisuja sie w ich przeznaczenie.
 
 Konsekwencje:
 
