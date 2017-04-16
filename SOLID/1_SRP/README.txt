@@ -9,8 +9,8 @@ Definicja:
 
 Objasnienie:
 
-    Zasada ta polega na umieszczeniu w interfejsie/klasie tylko takich funkcjonalnosci, 
-    ktore maja scisle polaczenie, wpisuja sie w ich przeznaczenie.
+    Zasada ta polega na umieszczeniu w interfejsie/klasie/funkcji tylko takich 
+    funkcjonalnosci, ktore maja scisle polaczenie, wpisuja sie w ich przeznaczenie.
 
 Konsekwencje:
 
