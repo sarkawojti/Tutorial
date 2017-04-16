@@ -1,6 +1,7 @@
 #pragma once
 
 #include <boost/graph/adjacency_list.hpp>
+#include <iostream>
 
 #include "IGraph.h"
 
@@ -11,7 +12,7 @@ template<class TPropertyVertex      = boost::no_property,
          class TOutEdgeListSelector = boost::vecS,
          class TVertexListSelector  = boost::vecS,
          class TEdgeListSelector    = boost::listS>
-class Graph : public IGraph<TPropertyVertex>
+class Graph : public IGraph<TPropertyVertex, TPropertyEdge>
 {
 private:
     using AdjacentListGraph =
@@ -24,15 +25,20 @@ public:
 
     void clear() override { std::cout << "Remove all vertices." << std::endl; graph.clear(); }
 
-    void addVertex(const TPropertyVertex&) override;
-    bool removeVertex(const TPropertyVertex&) override;
-    bool findVertex(const TPropertyVertex&) const override;
+    void add_vertex(const TPropertyVertex&) override;
+    bool add_vertex_unique(const TPropertyVertex&) override;
+    bool remove_vertex(const TPropertyVertex&) override;
+    bool find_vertex(const TPropertyVertex&) const override;
+    unsigned num_of_vertices() const override { return num_vertices(graph); }
 
-    unsigned numVertices() const override { return num_vertices(graph); }
+    bool add_edge(const TPropertyVertex&, const TPropertyVertex&, const TPropertyEdge&) override;
+    bool add_edge_unique(const TPropertyVertex&, const TPropertyVertex&, const TPropertyEdge&) override;
+    unsigned num_of_edges() const override { return num_edges(graph); }
 
 private:
     AdjacentListGraph graph;
 
+    bool add_edge(const TPropertyVertex&, const TPropertyVertex&, const TPropertyEdge&, bool);
     boost::optional<VertexId> searchVertex(const TPropertyVertex&) const;
 };
 
@@ -40,19 +46,13 @@ template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class
         class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
 bool Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
            TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
-    ::findVertex(const TPropertyVertex& vertex) const
+    ::find_vertex(const TPropertyVertex& vertex) const
 {
-    auto search_result = searchVertex(vertex);
-    if(not search_result)
+    if(searchVertex(vertex))
     {
-        std::cout << "Not found vertex: [" << vertex << "]." << std::endl;
-        return false;
+        return true;
     }
-
-    std::cout << "Found vertex: [" << vertex << "] - descriptor("
-              << *search_result << ")." << std::endl;
-
-    return true;
+    return false;
 }
 
 template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class TGraphSelector,
@@ -68,9 +68,13 @@ Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
     {
         if(graph[*_search_iter] == vertex)
         {
+            std::cout << "Found vertex: [" << vertex
+                      << "] - descriptor(" << *_search_iter
+                      << ")." << std::endl;
             return *_search_iter;
         }
     }
+    std::cout << "Not found vertex: [" << vertex << "]." << std::endl;
     return boost::none;
 }
 
@@ -78,16 +82,19 @@ template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class
         class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
 bool Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
            TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
-    ::removeVertex(const TPropertyVertex& vertex)
+    ::remove_vertex(const TPropertyVertex& vertex)
 {
     auto search_result = searchVertex(vertex);
     if(not search_result) return false;
 
-    std::cout << "Removed vertex: [" << vertex << "] - descriptor(" << *search_result
-              << "). Actual num of vertices - " << numVertices() - 1 << "." << std::endl;
-
     clear_vertex(*search_result, graph);
-    remove_vertex(*search_result, graph);
+    boost::remove_vertex(*search_result, graph);
+
+    std::cout << "Removed vertex: [" << vertex
+              << "] - descriptor(" << *search_result
+              << "). Actual num of vertices : " << num_of_vertices()
+              << "." << std::endl;
+
     return true;
 }
 
@@ -95,9 +102,96 @@ template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class
         class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
 void Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
            TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
-    ::addVertex(const TPropertyVertex& vertex)
+    ::add_vertex(const TPropertyVertex& vertex)
 {
-    const auto _vertex_descriptor = add_vertex(vertex, graph);
-    std::cout << "Added vertex: [" << vertex << "] - descriptor(" << _vertex_descriptor
-              << "). Actual num of vertices - " << numVertices() << "." << std::endl;
+    const auto _vertex_descriptor = boost::add_vertex(vertex, graph);
+    std::cout << "Added vertex: [" << vertex
+              << "] - descriptor(" << _vertex_descriptor
+              << "). Actual num of vertices : " << num_of_vertices()
+              << "." << std::endl;
+}
+
+template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class TGraphSelector,
+        class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
+bool Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
+           TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
+    ::add_vertex_unique(const TPropertyVertex& vertex)
+{
+    if(find_vertex(vertex))
+    {
+        return false;
+    }
+    add_vertex(vertex);
+    return true;
+}
+
+template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class TGraphSelector,
+        class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
+bool Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
+           TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
+    ::add_edge(const TPropertyVertex& source_vertex,
+               const TPropertyVertex& target_vertex,
+               const TPropertyEdge& edge)
+{
+    return Graph::add_edge(source_vertex, target_vertex, edge, false);
+}
+
+template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class TGraphSelector,
+        class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
+bool Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
+           TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
+    ::add_edge_unique(const TPropertyVertex& source_vertex,
+                      const TPropertyVertex& target_vertex,
+                      const TPropertyEdge& edge)
+{
+    return Graph::add_edge(source_vertex, target_vertex, edge, true);
+}
+
+template<class TPropertyVertex, class TPropertyEdge, class TPropertyGraph, class TGraphSelector,
+        class TOutEdgeListSelector, class TVertexListSelector,class TEdgeListSelector>
+bool Graph<TPropertyVertex, TPropertyEdge, TPropertyGraph, TGraphSelector,
+           TOutEdgeListSelector, TVertexListSelector, TEdgeListSelector>
+    ::add_edge(const TPropertyVertex& source_vertex,
+               const TPropertyVertex& target_vertex,
+               const TPropertyEdge& edge,
+               bool  check_unique)
+{
+    std::cout << "Try add edge: [" << source_vertex
+              << "] and [" <<  target_vertex
+              << "]." << std::endl;
+    auto source = searchVertex(source_vertex);
+    auto target = source;
+    if(source_vertex != target_vertex)
+    {
+        target = searchVertex(target_vertex);
+    }
+
+    if(source and target)
+    {
+        if(check_unique)
+        {
+            auto search_item = boost::edge(*source, *target, graph);
+            if(search_item.second)
+            {
+                std::cout << "The edge is already in the graph "
+                          << "- descriptor(" << search_item.first
+                          << ")." << std::endl;
+                return false;
+            }
+        }
+
+        auto result = boost::add_edge(*source, *target, edge, graph);
+        if(result.second)
+        {
+            std::cout << "Added edge: [" << source_vertex
+                      << "] - descriptor(" << *source
+                      << ") and [" << target_vertex
+                      << "] - descriptor(" << *target
+                      << ") - edge descriptor(" << result.first
+                      << "). Actual num of edges : " << num_of_edges()
+                      << "." << std::endl;
+            return true;
+        }
+    }
+    return false;
 }
