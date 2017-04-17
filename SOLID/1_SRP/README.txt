@@ -1,6 +1,9 @@
 
 Zasada pojedynczej odpowiedzialnosci [Single Responsibility Principle]
 
+Autor:
+    Toma DeMarco/ Meilir Page-Jones
+
 
 Definicja:
     
