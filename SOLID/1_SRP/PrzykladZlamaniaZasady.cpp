@@ -1,11 +1,14 @@
 #include<string>
+#include <regex>
 
 class Person
 {
     std::string _name;
     std::string  _surname;
-    /** atrybuty zwiazane z adresem nie sa scisle powiazane z klasa Person,
-       powinny zostac wydzielone do osobnej klasy **/
+
+    /** pola klasy Person: '_home_town', '_street', '_post_code',
+        '_home_number', '_flat_number' NIE SA z nia scisle POWIAZANE;
+        powinny zostac wydzielone do osobnej klasy **/
     std::string _home_town;
     std::string _street;
     unsigned _post_code;
@@ -14,16 +17,19 @@ class Person
 
     std::string _email;
 
-    /** metoda walidujaca poprawnosc adres e-mail
-        nie powinna lezec w obowiazakach klasy Person **/
+    /** metoda klasy Person odpowiedzialna za walidacje poprawnosci
+        adresu e-mail NIE POWINNA znajdowac sie w zakresie jej obowiazkow;
+        powinna  zostac wydzielona do osobnej klasy **/
     bool validate_email(const std::string& email) const
     {
-        if(email.find('@'))
+        if(std::regex_match(email, std::regex("(.+)(@)(.+)(.)(.+)")));
         {
             return true;
         }
-        /** funkcja walidujaca nie powinna robic kilku rzeczy a JEDNA,
-            rzucanie wyjatku powinno zostac przeniesione do wyzszej warstwy **/
+        /** metoda klasy Person POWINNA byc ODPOWIEDZIALNA za JEDNA rzecz -
+            dokonanie walidacji poprawnosci formatu zmiennej 'email';
+            dodatkowy obowiazek - rzucanie wyjatku powinien zostac przenisiony
+            do wyzszej warstwy kodu **/
         throw "Wrong email format.";
         return false;
     }
@@ -45,8 +51,10 @@ public:
           _home_number(home_number),
           _flat_number(flat_number)
     {
-        /** konstruktor nie powinien walidowac poprawnosci dostarczonych danych,
-            dodatkowa funkcjonalnosc poza tworzeniem obiektu **/
+        /** konstruktor klasy Person nie powinien walidowac poprawnosci dostarczonych
+            danych a zajmowac sie swoim obowiazkiem - tworzeniem konkretnych obiektow
+            i rzucac wyjatki jedynie zwiazne z procesem ich kreacji;
+            walidacja poprawnosci danych POWINNA znajdowac sie w wyzszych warstwach kodu**/
         if(validate_email(email))
         {
             _email = email;

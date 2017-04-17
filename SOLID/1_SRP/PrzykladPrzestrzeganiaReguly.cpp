@@ -1,4 +1,6 @@
 #include<string>
+#include <regex>
+#include <memory>
 
 class Address
 {
@@ -24,12 +26,20 @@ public:
     }
 };
 
-class EmailValidator
+template<class T>
+class IValidator
+{
+public:
+    virtual bool validate(const T&) = 0;
+};
+
+
+class EmailValidator : public IValidator<std::string>
 {
 public:
     bool validate(const std::string& email)
     {
-        return (email.find('@'));
+        return std::regex_match(email, std::regex("(.+)(@)(.+)(.)(.+)"));
     }
 };
 
@@ -37,7 +47,6 @@ class Person
 {
     std::string _name;
     std::string  _surname;
-
     Address _address;
     std::string _email;
 
@@ -56,16 +65,17 @@ public:
 
 int main()
 {
-    /** wydzielenie czesci niepowiazanych danych z obiektem do osobnej klasy **/
+    /** SOLUTION: wydzielenie czesci niepowiazanych pol z klasy Person do klasy Address **/
     Address address("Krakow", "Lea", 30056, 23, 13);
 
-    /** wyjecie metody walidujacej do osobnej klasy **/
-    EmailValidator email_validator;
+    /** SOLUTION: Stworzenie interfejsu i klasy opdowiedzialnej za proces walidacji danych **/
+    std::shared_ptr<IValidator<std::string>> validator = std::make_shared<EmailValidator>();
     std::string email = "jan.kowalski@gmail.com";
-    /** walidacja poprawosci danych przed stworzeniem obiektu **/
-    if(not email_validator.validate(email))
+    /** SOLUTION: walidacja poprawosci danych w wyzszej warstwie kodu;
+        [przed proba stworzenia obiektu, zaraz za stworzeniem zmiennej] **/
+    if(not validator->validate(email))
     {
-        /** rzucanie wyjatku przed tworzeniem obiektu **/
+        /** SOLUTION: rzucanie wyjatku przez wyzsza warstwe kodu **/
         throw "Wrong email format.";
     }
 
