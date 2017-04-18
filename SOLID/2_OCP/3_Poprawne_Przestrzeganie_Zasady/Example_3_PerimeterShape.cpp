@@ -1,7 +1,6 @@
-
-#include<memory>
-#include<list>
-#include<iostream>
+#include <iostream>
+#include <memory>
+#include <list>
 
 /** Example-3: Baza jest Example-2 **/
 
@@ -36,14 +35,13 @@ public:
 
 class Square : public Shape
 {
-    unsigned _width;
+    double _width;
 public:
-    Square(unsigned width)
+    Square(double width)
         : _width(width)
     {
     }
-
-    unsigned get_width() const
+    double get_width() const
     {
         return _width;
     }
@@ -54,44 +52,43 @@ public:
     }
 };
 
-class Circle : public Shape
+class Rectangle : public Shape
 {
-    unsigned _radius;
+    double _width;
+    double _height;
 public:
-    Circle(unsigned radius)
-        : _radius(radius)
+    Rectangle(double width, double height)
+        : _width(width), _height(height)
     {
     }
-
-    unsigned get_radius() const
+    double get_width() const
     {
-        return _radius;
+        return _width;
     }
 
-    double accept(const std::shared_ptr<IShapeVisitor>& visitor)
+    double get_height() const
+    {
+        return _height;
+    }
+
+    double accept(const std::shared_ptr<IShapeVisitor>& visitor) override
     {
         return visitor->visit(this);
     }
 };
 
-class Rectangle : public Shape
+class Circle : public Shape
 {
-    unsigned _width;
-    unsigned _height;
+    double _radius;
 public:
-    Rectangle(unsigned width, unsigned height)
-        : _width(width), _height(height)
+    Circle(double radius)
+        : _radius(radius)
     {
     }
 
-    unsigned get_width() const
+    double get_radius() const
     {
-        return _width;
-    }
-
-    unsigned get_height() const
-    {
-        return _height;
+        return _radius;
     }
 
     double accept(const std::shared_ptr<IShapeVisitor>& visitor) override
@@ -119,6 +116,16 @@ public:
     }
 };
 
+class Calculator
+{
+public:
+    double operator()(const std::shared_ptr<Shape>& shape,
+                      const std::shared_ptr<IShapeVisitor>& shape_visitor)
+    {
+        return shape->accept(shape_visitor);
+    }
+};
+
 /** Task-3: dodanie klasy obliczajacej obwod figur **/
 class IPerimeterShapeVisitor : public IShapeVisitor
 {
@@ -139,15 +146,8 @@ public:
     }
 };
 
-class Calculator
-{
-public:
-    double operator()(const std::shared_ptr<Shape>& shape,
-                      const std::shared_ptr<IShapeVisitor>& shape_visitor)
-    {
-        return shape->accept(shape_visitor);
-    }
-};
+/** By zrealizowac zadanie [rozszerzyc dana klase] NIE dokonalismy
+    modyfikacji w kodzie [zachowanie zasady: Open - closed Principle] **/
 
 int main()
 {
@@ -157,19 +157,17 @@ int main()
     shapes.push_back(std::make_shared<Square>(2));
     shapes.push_back(std::make_shared<Rectangle>(2, 6));
 
-    Calculator calculator;
+    Calculator area_calculator;
 
     std::shared_ptr<IShapeVisitor> area_shape_visitor =
         std::make_shared<IAreaShapeVisitor>();
-
     std::shared_ptr<IShapeVisitor> perimeter_shape_visitor =
         std::make_shared<IPerimeterShapeVisitor>();
 
     for(const auto& elem : shapes)
     {
-        std::cout << "Area:" << calculator(elem, area_shape_visitor) << std::endl;
+        std::cout << "Area:" << area_calculator(elem, area_shape_visitor) << std::endl;
         std::cout << "Perimeter:" << calculator(elem, perimeter_shape_visitor) << std::endl;
     }
-
-
 }
+

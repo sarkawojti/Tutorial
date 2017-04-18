@@ -1,6 +1,12 @@
+
 #include <iostream>
 #include <memory>
 #include <list>
+
+/**
+    Example-2: Aplikacja zawiera mozliwosc tworzenia dwoch figur : 'Square' i 'Circle'
+        oraz klase umozliwiajaca oblicznie pol powierzchni figur.
+**/
 
 class Shape
 {
@@ -16,7 +22,7 @@ public:
         : _width(width)
     {
     }
-    double get_width()
+    double get_width() const
     {
         return _width;
     }
@@ -37,27 +43,6 @@ public:
     }
 };
 
-/** Task-2: Dodanie nowej figury 'Rectangle' **/
-class Rectangle : public Shape
-{
-    double _width;
-    double _height;
-public:
-    Rectangle(double width, double height)
-        : _width(width), _height(height)
-    {
-    }
-    double get_width()
-    {
-        return _width;
-    }
-
-    double get_height()
-    {
-        return _height;
-    }
-};
-
 class AreaCalculator
 {
 public:
@@ -75,21 +60,9 @@ public:
                    static_cast<Circle*>(&*shape)->get_radius() *
                    3.14;
         }
-        /** Task_2: dodanie nowego warunku do istniejacego kodu **/
-        if(dynamic_cast<Rectangle*>(&*shape))
-        {
-            return static_cast<Rectangle*>(&*shape)->get_width()  *
-                   static_cast<Rectangle*>(&*shape)->get_height() /
-                   2;
-        }
         throw std::string("Unexpected shape");
     }
 };
-
-/** Task_2: dodanie nowej figury 'Rectangle' do algorytmu oblicznia pola figur **/
-
-/** By zrealizowac zadanie [rozszerzyc dana klase] dokonalismy modyfikacji w [nieczytelnym] kodzie
-    [zlamanie zasady: Open - closed Principle] **/
 
 int main()
 {
@@ -97,7 +70,6 @@ int main()
     shapes.push_back(std::make_shared<Square>(2));
     shapes.push_back(std::make_shared<Circle>(8));
     shapes.push_back(std::make_shared<Square>(2));
-    shapes.push_back(std::make_shared<Rectangle>(2, 6));
 
     AreaCalculator area_calculator;
 
