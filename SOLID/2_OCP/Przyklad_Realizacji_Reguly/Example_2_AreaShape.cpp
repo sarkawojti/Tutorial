@@ -142,7 +142,7 @@ public:
     }
 };
 
-/** By zrealizowac zadanie-2 [rozszerzyc dana klase] dokonalismy 0 modyfikacji w kodzie
+/** By zrealizowac zadanie-2 [rozszerzyc dana klase] NIE dokonalismy modyfikacji w kodzie
     [przestrzeganie zasady: Open - closed Principle]. Wszelkie potrzebne zmiany w kodzie
     okreslamy mianem refactoringu [zmiana semantyczna kodu, bez zmiany jego funkcjonalnosci]
     dzieki ktoremu uzyskalismy kod spojny z zasada OCP **/

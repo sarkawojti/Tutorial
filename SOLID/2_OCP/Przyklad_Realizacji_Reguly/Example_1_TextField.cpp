@@ -53,7 +53,7 @@ public:
         return _textField->get_text();
     }
 };
-/** Task-1: By wykonac to zadanie [rozszerzyc dana klase] dokonalismy ZERO
+/** Task-1: By wykonac to zadanie [rozszerzyc dana klase] NIE dokonalismy
             modyfikacji w kodzie [zastosowanie zasady: Open-Closed Principle]
 **/
 

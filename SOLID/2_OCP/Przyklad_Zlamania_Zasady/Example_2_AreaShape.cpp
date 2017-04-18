@@ -88,7 +88,7 @@ public:
 
 /** Task_2: dodanie nowej figury 'Rectangle' do algorytmu oblicznia pola figur **/
 
-/** By zrealizowac zadanie [rozszerzyc dana klase] dokonalismy 1 modyfikacji w [nieczytelnym] kodzie
+/** By zrealizowac zadanie [rozszerzyc dana klase] dokonalismy modyfikacji w [nieczytelnym] kodzie
     [zlamanie zasady: Open - closed Principle] **/
 
 int main()

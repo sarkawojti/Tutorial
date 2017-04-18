@@ -14,7 +14,7 @@ class TextField : public ITextField
 {
     std::string _text;
 
-    /** Task_1 : dodanie nowego pola informujacej czy klasa jest typu: Read Only **/
+    /** Task_1 : dodanie nowego pola informujacego czy klasa jest typu: Read Only **/
     bool _is_read_only;
 
 public:
@@ -45,7 +45,7 @@ public:
 
 /** Task_1: Dodaj mozliwosc tworzenia klasy pola tekstowego tylko do odczytu [Read only]. **/
 
-/** By zrealizowac zadanie [rozszerzyc dana klase] dokonalismy 3 modyfikacji w kodzie
+/** By zrealizowac zadanie [rozszerzyc dana klase] dokonalismy modyfikacji w kodzie
     [zlamanie zasady: Open - closed Principle] **/
 
 int main()
