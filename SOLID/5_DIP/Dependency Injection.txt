@@ -1,0 +1,19 @@
+
+Dependency Injection - DI [Wstrzykiwanie zaleznosci]
+
+    Sposob implementacji IoC, umozliwajacy wstrzykiwanie modulow niskiego poziomu
+    do obiektow wysokopoziomowych i blokujacy mozliwosc ich tworzenia wewnatrz nich.
+
+    Rodzaje:
+	- przez konstruktor [wymusza wstrzykiwanie przy procesie tworzenia obiektu, relacja 1-1]
+
+	- przez setter	    [wykorzystanie specjalnej funkcji do dostarczania modulu, relacja 1-n,
+			     nalezy sprawdzac brak przypisania do wskaznika/referencji przed uzyciem]
+
+	- przez interfejs   [wykorzystanie metody do przekazania modulu, relacja 1-n, 
+                             modul wyzszego poziomu nie musi przechowywac wskaznika/referencji do nizszego]
+
+
+
+
+

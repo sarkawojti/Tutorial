@@ -1,0 +1,15 @@
+
+Dependency Inversion Principle [Zasada odwrocenia zaleznosci]
+    - zasada okreslajaca zaleznosc pomiedzy dwoma modulami roznego poziomu.
+
+Inversion of Control [Odwrocenie zaleznosci] - IoC
+    - mechanizm realizacji powyzszej zasady, dzieki ktoremu moduly wyzszego 
+      poziomu moga zalezec od abstrakcji, a nie od konkretnej implementacji 
+      modulu nizszego poziomu.
+
+	m.in. Inteface Inversion - modul wysokiego poziomu posiada referencje/wskaznik 
+	        do intefejs modul niskiego poziomu a nie bezposrednio zalezy od konkretnego 
+		obiektu (implememntacji).
+
+
+
