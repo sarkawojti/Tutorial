@@ -12,6 +12,8 @@ public:
     /** MINUS - interfejs odpowiedzialny za dwie nie powiazane funkcjonalnosci - 'fat interface' **/
     virtual void work() = 0;
     virtual void eat() = 0;
+
+    virtual ~IWorker() = default;
 };
 
 /** TASK-1: dodanie klasy reprezentujacej pracownika, ktory musi jesc **/

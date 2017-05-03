@@ -31,6 +31,8 @@ class IValidator
 {
 public:
     virtual bool validate(const T&) = 0;
+
+    virtual ~IValidator() = default;
 };
 
 

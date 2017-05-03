@@ -9,6 +9,8 @@ class IWorkable
 {
 public:
     virtual void work() = 0;
+
+    virtual ~IWorkable() = default;
 };
 
 /** TASK-1: dodanie interfejsu 'jedz' **/
@@ -16,6 +18,8 @@ class IFeedable
 {
 public:
     virtual void eat() = 0;
+
+    virtual ~IFeedable() = default;
 };
 
 /** TASK-1: dodanie klasy reprezentujacej pracownika, ktory musi jesc **/

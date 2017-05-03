@@ -10,6 +10,8 @@ class SwitchableDevice
 public:
     virtual void turn_off() = 0;
     virtual void turn_on() = 0;
+
+    virtual ~SwitchableDevice() = default;
 };
 
 /** TASK-1: dodanie modulu niskiego poziomu do rodziny 'abstrakcji' **/
@@ -32,6 +34,8 @@ public:
 class ClickButton
 {
     virtual void click() = 0;
+
+    virtual ~ClickButton() = default;
 };
 
 /** TASK-1/TASK-2: Dodanie modulu wysokiego poziomu zarzadzajacego
