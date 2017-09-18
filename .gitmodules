@@ -1,0 +1,6 @@
+[submodule "angular2-play"]
+	path = angular2-play
+	url = https://github.com/sarkawojti/Tutorial
+[submodule "scala-play-slick-json"]
+	path = scala-play-slick-json
+	url = https://github.com/sarkawojti/Tutorial
